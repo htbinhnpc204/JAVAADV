@@ -14,9 +14,9 @@ public class HoaDon extends javax.swing.JFrame {
     /**
      * Creates new form HoaDon
      */
-    public HoaDon(String maHD) {
+    public HoaDon() {
         initComponents();
-        mahD = maHD;
+    
     }
 
     /**
