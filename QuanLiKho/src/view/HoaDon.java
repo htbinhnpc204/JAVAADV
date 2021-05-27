@@ -10,12 +10,13 @@ package view;
  * @author Dai
  */
 public class HoaDon extends javax.swing.JFrame {
-
+    static String mahD;
     /**
      * Creates new form HoaDon
      */
-    public HoaDon() {
+    public HoaDon(String maHD) {
         initComponents();
+        mahD = maHD;
     }
 
     /**
