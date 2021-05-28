@@ -114,7 +114,7 @@
     <Component class="javax.swing.JButton" name="jButton4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="E:\L&#x1ead;p Tr&#xec;nh Tr&#x1ef1;c Quan\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\src\Image\User.png"/>
+          <Image iconType="3" name="/Image/User.png"/>
         </Property>
       </Properties>
       <Events>
@@ -154,7 +154,7 @@
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="E:\L&#x1ead;p Tr&#xec;nh Tr&#x1ef1;c Quan\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\src\Image\Login.png"/>
+          <Image iconType="3" name="/Image/Login.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng nh&#x1ead;p"/>
       </Properties>
@@ -165,7 +165,7 @@
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="E:\L&#x1ead;p Tr&#xec;nh Tr&#x1ef1;c Quan\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\src\Image\Exit mini.png"/>
+          <Image iconType="3" name="/Image/Exit mini.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
       </Properties>

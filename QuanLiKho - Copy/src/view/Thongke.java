@@ -265,6 +265,7 @@ public class Thongke extends javax.swing.JFrame {
         jLabel24.setText("Tên Sách");
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
         jButton8.setText("Thêm");
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -297,6 +298,7 @@ public class Thongke extends javax.swing.JFrame {
         jLabel26.setText("Nhà XB");
 
         ButtonXoa.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        ButtonXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Exit mini.png"))); // NOI18N
         ButtonXoa.setText("Xóa");
         ButtonXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ButtonXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -307,6 +309,7 @@ public class Thongke extends javax.swing.JFrame {
         });
 
         jButton9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Change.png"))); // NOI18N
         jButton9.setText("Sửa");
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

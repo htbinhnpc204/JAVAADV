@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author NGUYỄN THỊ THOA
  */
 public class Homee extends javax.swing.JFrame {
-
+    static public Homee h;
     /**
      * Creates new form Homee
      */
@@ -41,7 +41,7 @@ public class Homee extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("E:\\JavaSwing\\qlbh\\src\\Image\\Sale.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Payroll.png"))); // NOI18N
         jButton2.setText("Hóa đơn");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -52,7 +52,7 @@ public class Homee extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("E:\\JavaSwing\\qlbh\\src\\Image\\Database.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Cart.png"))); // NOI18N
         jButton3.setText("Lịch sử");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -63,7 +63,7 @@ public class Homee extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Downloads\\iconfinder_user_interface_ui_basic_app_ui_interface_logout_logout_7030313.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/iconfinder_user_interface_ui_basic_app_ui_interface_logout_logout_7030313.png"))); // NOI18N
         jButton4.setText("Thoát");
         jButton4.setToolTipText("");
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -78,7 +78,7 @@ public class Homee extends javax.swing.JFrame {
         jLabel1.setText("PHẦN MỀM QUẢN LÝ CỬA HÀNG BÁN SÁCH");
 
         jButton9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon("E:\\JavaSwing\\qlbh\\src\\Image\\Account.png")); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Account.png"))); // NOI18N
         jButton9.setText("Quản Lí nhân viên");
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -89,7 +89,7 @@ public class Homee extends javax.swing.JFrame {
         });
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("E:\\JavaSwing\\qlbh\\src\\Image\\Revenue.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Revenue.png"))); // NOI18N
         jButton1.setText("Thống kê");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -133,7 +133,7 @@ public class Homee extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(46, 46, 46))
         );
@@ -160,8 +160,9 @@ public class Homee extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        new QLnhanvien().setVisible(true);
-        this.dispose();
+        QLnhanvien.main(null);
+        setVisible(false);
+       
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -205,7 +206,7 @@ public class Homee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Homee().setVisible(true);
+              h=  new Homee();h.setVisible(true);
             }
         });
     }

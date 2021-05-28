@@ -35,7 +35,9 @@ public class login extends javax.swing.JFrame {
             return false;
         } else {
         }
+    
         return kq;
+     
 
     }
     /**
@@ -60,7 +62,7 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton4.setIcon(new javax.swing.ImageIcon("E:\\Lập Trình Trực Quan\\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\\src\\Image\\User.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/User.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -78,7 +80,7 @@ public class login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel3.setText("Mật Khẩu");
 
-        jButton2.setIcon(new javax.swing.ImageIcon("E:\\Lập Trình Trực Quan\\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\\src\\Image\\Login.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Login.png"))); // NOI18N
         jButton2.setText("Đăng nhập");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +88,7 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("E:\\Lập Trình Trực Quan\\Quan Ly Cua Hang Mua Ban Thiet Bi Dien Tu\\src\\Image\\Exit mini.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Exit mini.png"))); // NOI18N
         jButton3.setText("Thoát");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +186,7 @@ public class login extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-                new Homee().setVisible(true);
+                Homee.main(null);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");

@@ -10,12 +10,13 @@ package view;
  * @author NGUYỄN THỊ THOA
  */
 public class QLnhanvien extends javax.swing.JFrame {
-
+ static public QLnhanvien nv;
     /**
      * Creates new form QLnhanvien
      */
     public QLnhanvien() {
         initComponents();
+ 
     }
 
     /**
@@ -60,7 +61,11 @@ public class QLnhanvien extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
@@ -390,6 +395,11 @@ public class QLnhanvien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+      Homee.h.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -420,7 +430,7 @@ public class QLnhanvien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLnhanvien().setVisible(true);
+                nv = new QLnhanvien();nv.setVisible(true);
             }
         });
     }
