@@ -20,7 +20,7 @@ public class KetNoiCSDL {
 //            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databasename=demo;username:sa;password=12345");
             String url = "jdbc:sqlserver://localhost:1433; databaseName= QLkho";
             String user = "sa";
-            String pass = "12345";
+            String pass = "1132001";
             conn = DriverManager.getConnection(url, user, pass);
             System.out.println("ket noi thanh congtoi");
         } catch (Exception e) {
@@ -28,4 +28,6 @@ public class KetNoiCSDL {
         }
         return conn;
     }
+
+
 }
