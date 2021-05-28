@@ -121,4 +121,4 @@ begin
 	values(@temp,@maNV,getdate(),@tenKH,@loai)
 	select @temp
 end
-drop procedure insertHoaDon_pr
+--drop procedure insertHoaDon_pr

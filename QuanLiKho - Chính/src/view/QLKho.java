@@ -7,10 +7,12 @@ package view;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.SanPham;
 
 /**
  *
@@ -21,12 +23,26 @@ public class QLKho extends javax.swing.JFrame {
     /**
      * Creates new form QLKho
      */
-    public QLKho() {
+    public QLKho() throws SQLException {
         initComponents();
         Label_maNhanVien.setText(maNV);
-        
+            insertToComboBoxSanPham();
+        createTableSanPHamNhapXuat();
     }
-
+      void createTableSanPHamNhapXuat() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        TableSanPhamNhapXuat.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Mã ");
+        defaultTableModel.addColumn("Tên ");
+        defaultTableModel.addColumn("Số lượng ");
+        defaultTableModel.addColumn("Giá ");
+    }
+    void insertToComboBoxSanPham() throws SQLException {
+        List<SanPham> sanPhams = DAO.SanPhamDAO.getSanPhamAll();
+        for (SanPham sp : sanPhams) {
+            ComboBoxSanPham.addItem(sp.getMaSachString() + " " + sp.getTenSachString());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +58,7 @@ public class QLKho extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         TextFieldTenKH = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         Label_maNhanVien = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TableSanPhamNhapXuat = new javax.swing.JTable();
@@ -52,7 +69,6 @@ public class QLKho extends javax.swing.JFrame {
         TextFieldSoLuong = new javax.swing.JTextField();
         TextFieldDonGia = new javax.swing.JTextField();
         ComboBoxSanPham = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,6 +94,13 @@ public class QLKho extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setText("Mã");
 
+        jButton6.setText("Hoàn Thành");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         Label_maNhanVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Label_maNhanVien.setText("Từ nhân viên đăng nhập");
 
@@ -96,7 +119,6 @@ public class QLKho extends javax.swing.JFrame {
         jScrollPane3.setViewportView(TableSanPhamNhapXuat);
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon("E:\\JavaSwing\\qlbh\\src\\Image\\Add.png")); // NOI18N
         jButton5.setText("Nhập");
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -121,13 +143,6 @@ public class QLKho extends javax.swing.JFrame {
 
         ComboBoxSanPham.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jButton6.setText("Hoàn Thành");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -135,9 +150,6 @@ public class QLKho extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jScrollPane3)
                         .addGap(34, 34, 34))
@@ -149,9 +161,8 @@ public class QLKho extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ComboBoxLoaiNhapXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TextFieldTenKH)
-                                .addComponent(Label_maNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(Label_maNhanVien)
+                            .addComponent(TextFieldTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -168,6 +179,10 @@ public class QLKho extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(jButton5)
                         .addContainerGap())))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,8 +213,8 @@ public class QLKho extends javax.swing.JFrame {
                         .addComponent(ComboBoxSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
@@ -211,14 +226,13 @@ public class QLKho extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(215, 215, 215)
                 .addComponent(jLabel1)
                 .addContainerGap(219, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,8 +240,8 @@ public class QLKho extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -263,19 +277,21 @@ public class QLKho extends javax.swing.JFrame {
         // TODO add your handling code here:
         String loai;
         if(ComboBoxLoaiNhapXuat.getSelectedItem().toString().equals("Nhập"))
-        loai = "Nhập";
-        else loai ="Xuất";
+        loai = "N";
+        else loai ="X";
         try {
-            String mahd =  DAO.Service.insertHoaDon("NV01", TextFieldTenKH.getText(), loai);
+            String mahd =  DAO.Service.insertHoaDon(Label_maNhanVien.getText(), TextFieldTenKH.getText(), loai);
             for(int i =0;i<TableSanPhamNhapXuat.getRowCount();i++){
                 DAO.Service.insertChiTietHoaDon(mahd, TableSanPhamNhapXuat.getValueAt(i, 0).toString(), TableSanPhamNhapXuat.getValueAt(i, 2).toString(), TableSanPhamNhapXuat.getValueAt(i, 3).toString());
             }
-
+    JOptionPane.showMessageDialog(null, "Thêm Thành Công");
         } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, "Chưa thể thêm vào CSDL");
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -308,7 +324,11 @@ public class QLKho extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLKho().setVisible(true);
+                try {
+                    new QLKho().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(QLKho.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

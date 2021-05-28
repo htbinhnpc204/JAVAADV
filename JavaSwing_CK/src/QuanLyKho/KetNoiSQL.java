@@ -23,11 +23,11 @@ public class KetNoiSQL {
     private Connection con = null;
 
     public void KetNoi() {
-        String url = "net.sourceforge.jtds.jdbc.Driver";
+        String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         try {
             Class.forName(url);
-            String dbUrl = "jdbc:jtds:sqlserver://DESKTOP-7MQ7D4R:1433/QLKHO";
-            con = DriverManager.getConnection(dbUrl);
+            String dbUrl = "jdbc:sqlserver://localhost:1433; databaseName= QLKho";
+            con = DriverManager.getConnection(dbUrl,"sa","12345");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(KetNoiSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,6 +51,10 @@ public class KetNoiSQL {
 	
     public void Close() throws Exception {
         con.close();
+    }
+    public static void main(String[] args) {
+//        KetNoiSQL
+//        System.out.println("");
     }
 
 }

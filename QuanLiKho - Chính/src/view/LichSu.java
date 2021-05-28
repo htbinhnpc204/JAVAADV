@@ -5,17 +5,59 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import sun.security.util.Length;
+
 /**
  *
  * @author NGUYỄN THỊ THOA
  */
 public class LichSu extends javax.swing.JFrame {
-
+	Connection con;
+	public PreparedStatement pst;
+	public static ResultSet rs = null;
+	public Statement st;
+	DefaultTableModel defaultTableModel;
+	KetNoiSQL ketnoi = new KetNoiSQL();
     /**
      * Creates new form LichSu
      */
     public LichSu() {
         initComponents();
+        setData("desc");
+    }
+       private void setData(String a){
+	ketnoi.KetNoi();
+	try {
+		rs = ketnoi.GetResultSet("HoaDon",a);
+		jTBlichsunhapxuat.removeAll();
+		String [] arr = {"Mã HD","Mã NV","Ngày nhập/xuất","Tên KH","Loại HD"};
+		defaultTableModel = new DefaultTableModel(arr,0){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+			//all cells false
+				return false;
+		}
+		};
+		while(rs.next()){
+			Vector vec = new Vector();
+			vec.add(rs.getString("MaHD"));
+			vec.add(rs.getString("MaNV"));
+			vec.add(rs.getString("Ngay"));
+			vec.add(rs.getString("TenKH"));
+			vec.add(rs.getString("Loai"));
+			defaultTableModel.addRow(vec);
+		}
+		jTBlichsunhapxuat.setModel(defaultTableModel);
+	} catch (SQLException ex) {
+		Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	 
     }
 
     /**
@@ -29,11 +71,11 @@ public class LichSu extends javax.swing.JFrame {
 
         jPanel15 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTBlichsunhapxuat = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCBsapxep = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
@@ -43,8 +85,8 @@ public class LichSu extends javax.swing.JFrame {
 
         jPanel15.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTBlichsunhapxuat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTBlichsunhapxuat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,7 +97,7 @@ public class LichSu extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Thời gian"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTBlichsunhapxuat);
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Find.png"))); // NOI18N
@@ -78,17 +120,27 @@ public class LichSu extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Nhập mã nhập-xuất");
 
-        jComboBox2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mới -> Cũ", "Cũ -> Mới" }));
+        jCBsapxep.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jCBsapxep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mới -> Cũ", "Cũ -> Mới" }));
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton4.setText("Hủy");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Sắp Xếp");
 
         jButton7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton7.setText("Xem Chi Tiết");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -114,7 +166,7 @@ public class LichSu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
                 .addGap(13, 13, 13))
@@ -129,7 +181,7 @@ public class LichSu extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
                     .addComponent(jLabel4)
                     .addComponent(jButton7))
@@ -167,12 +219,57 @@ public class LichSu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+ketnoi.KetNoi();
+	try {
+		rs = ketnoi.getDataById("HoaDon",jTextField2.getText());
+		jTBlichsunhapxuat.removeAll();
+		String [] arr = {"Mã HD","Mã NV","Ngày nhập/xuất","Tên KH","Loại HD"};
+		defaultTableModel = new DefaultTableModel(arr,0){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+			//all cells false
+				return false;
+		}
+		};
+		while(rs.next()){
+			Vector vec = new Vector();
+			vec.add(rs.getString("MaHD"));
+			vec.add(rs.getString("MaNV"));
+			vec.add(rs.getString("Ngay"));
+			vec.add(rs.getString("TenKH"));
+			vec.add(rs.getString("Loai"));
+			defaultTableModel.addRow(vec);
+		}
+		jTBlichsunhapxuat.setModel(defaultTableModel);
+	} catch (SQLException ex) {
+		Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+	}        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+		int row = jTBlichsunhapxuat.getSelectedRow();
+		if (row == -1){
+			JOptionPane.showMessageDialog(LichSu.this,"Chọn hóa đơn muốn xem chi tiết", "Thông báo", JOptionPane.ERROR_MESSAGE);
+		} else {
+			String id = String.valueOf(jTBlichsunhapxuat.getValueAt(row, 0));
+			new ChiTietHoaDon(id).setVisible(true);
+			this.dispose();
+		}        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+		defaultTableModel.setRowCount(0);
+		String sapxep = String.valueOf(jCBsapxep.getSelectedItem());
+		if (sapxep == "Mới -> Cũ"){
+			setData("desc");
+		} else {
+			setData("asc");
+		}        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,13 +310,13 @@ public class LichSu extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jCBsapxep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTBlichsunhapxuat;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

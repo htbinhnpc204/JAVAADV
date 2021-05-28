@@ -23,12 +23,12 @@ public class formThongTin extends javax.swing.JFrame {
 
     //SQL CONNETCT
     public static Connection getConn(String csdlName) {
-        Connection conn = null;
-        String url = "net.sourceforge.jtds.jdbc.Driver";
+         Connection conn = null;
+        String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         try {
             Class.forName(url);
-            String dbUrl = "jdbc:jtds:sqlserver://Binh:1433/" + csdlName;
-            conn = DriverManager.getConnection(dbUrl);
+            String dbUrl = "jdbc:sqlserver://localhost:1433; databaseName= " + csdlName;
+            conn = DriverManager.getConnection(dbUrl,"sa","12345");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(formThongTin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -134,7 +134,7 @@ public class formThongTin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //Customize code
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         String sql = "SELECT * FROM Nhanvien WHERE manv = '" + lbID.getText() + "'";
         try {
             Statement st = con.createStatement();
@@ -163,8 +163,7 @@ public class formThongTin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String sql = "UPDATE Nhanvien SET TenNV = ?, NgaySinh = ?, SDT = ?, Email = ?, DiaChi = ?, GioiTinh = ? WHERE manv = ?";
+  String sql = "UPDATE Nhanvien SET TenNV = ?, NgaySinh = ?, SDT = ?, Email = ?, DiaChi = ?, GioiTinh = ? WHERE manv = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, lbName.getText());
@@ -181,6 +180,10 @@ public class formThongTin extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
+
+
+        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     void clear() {

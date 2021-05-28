@@ -179,20 +179,23 @@ public class login extends javax.swing.JFrame {
         try { 
             Connection con = getConnection();
             System.out.println(con);
-            String sql = "use QLKHO \n Select * from dbo.Login where Name = ? and Password  = ?";
+            String sql = "use QLKHO \n Select * from dbo.NhanVien where maNV = ? and Password  = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, userName.getText());
             pst.setString(2, jPass.getText());
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-                Homee.main(null);
+                QLKho.maNV =  userName.getText();
+                  Homee.main(null);
+    
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
                 userName.setText("");
                 jPass.setText("");
             }
+          
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

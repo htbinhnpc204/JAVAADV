@@ -17,11 +17,11 @@ public class formMatKhau extends javax.swing.JFrame {
     //SQL CONNETCT
     public static Connection getConn(String csdlName) {
         Connection conn = null;
-        String url = "net.sourceforge.jtds.jdbc.Driver";
+        String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         try {
             Class.forName(url);
-            String dbUrl = "jdbc:jtds:sqlserver://Binh:1433/" + csdlName;
-            conn = DriverManager.getConnection(dbUrl);
+            String dbUrl = "jdbc:sqlserver://localhost:1433; databaseName= " + csdlName;
+            conn = DriverManager.getConnection(dbUrl,"sa","12345");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(formThongTin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -88,7 +88,7 @@ public class formMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         String sql = "UPDATE Nhanvien SET Password = ? WHERE Email = ?";
         String sqlSelect = "SELECT * FROM nhanvien WHERE Email = '" + lbEmail.getText() + "'";
         if (!lbMKmoi.getText().equals(lbXacNhan.getText())) {
