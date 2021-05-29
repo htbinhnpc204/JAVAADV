@@ -19,6 +19,8 @@ import model.SanPham;
  * @author NGUYỄN THỊ THOA
  */
 public class QLKho extends javax.swing.JFrame {
+    public static QLKho kho;
+    
     static public String maNV;
     /**
      * Creates new form QLKho
@@ -71,7 +73,12 @@ public class QLKho extends javax.swing.JFrame {
         ComboBoxSanPham = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -294,6 +301,10 @@ public class QLKho extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+   Homee.h.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -325,7 +336,7 @@ public class QLKho extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new QLKho().setVisible(true);
+                    kho = new QLKho();kho.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(QLKho.class.getName()).log(Level.SEVERE, null, ex);
                 }

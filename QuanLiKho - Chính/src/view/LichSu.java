@@ -18,6 +18,7 @@ import sun.security.util.Length;
  * @author NGUYỄN THỊ THOA
  */
 public class LichSu extends javax.swing.JFrame {
+    static public LichSu ls ;
 	Connection con;
 	public PreparedStatement pst;
 	public static ResultSet rs = null;
@@ -81,7 +82,12 @@ public class LichSu extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel15.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -271,6 +277,10 @@ ketnoi.KetNoi();
 		}        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+   Homee.h.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -301,7 +311,7 @@ ketnoi.KetNoi();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LichSu().setVisible(true);
+                ls = new LichSu();ls.setVisible(true);
             }
         });
     }

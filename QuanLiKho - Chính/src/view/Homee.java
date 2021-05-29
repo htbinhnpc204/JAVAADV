@@ -171,8 +171,8 @@ public class Homee extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new LichSu().setVisible(true);
-        this.dispose();
+        LichSu.main(null);
+        setVisible(false);
         // TODO add you  // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -191,12 +191,8 @@ public class Homee extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            new Thongke().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
+        Thongke.main(null);
+         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

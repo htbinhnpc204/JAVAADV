@@ -36,6 +36,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class Thongke extends javax.swing.JFrame {
 
+    public static Thongke tk;
+
     /**
      * Creates new form Thongke casi nafy chiuj aw code cuar mi toiws tdoan mo
      * ro chuaw lamf sao them. tu tu da de lam bai nhomtr c da
@@ -65,27 +67,26 @@ public class Thongke extends javax.swing.JFrame {
         defaultTableModel = new DefaultTableModel();
         jTable5.setModel(defaultTableModel);
         defaultTableModel.addColumn("Mã sản phẩm");
-         defaultTableModel.addColumn("Tên sản phẩm");
+        defaultTableModel.addColumn("Tên sản phẩm");
         defaultTableModel.addColumn("Số lượng bán");
-        String sql_query = "select top 3 temp.MaSach,SanPham.TenSach, tong from\n" +
-"(select MaSach, sum(SoLuong) as tong from  ChiTietHoaDon\n" +
-"group by maSach)as temp,SanPham\n" +
-"where temp.MaSach = SanPham.MaSach\n" +
-"order by tong desc ";
+        String sql_query = "select top 3 temp.MaSach,SanPham.TenSach, tong from\n"
+                + "(select MaSach, sum(SoLuong) as tong from  ChiTietHoaDon\n"
+                + "group by maSach)as temp,SanPham\n"
+                + "where temp.MaSach = SanPham.MaSach\n"
+                + "order by tong desc ";
 
         Connection con = KetNoiCSDL.getConnection();    // baif nhom day maf chayj k dc
         PreparedStatement ps = con.prepareStatement(sql_query);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             defaultTableModel.addRow(new Object[]{
-                rs.getString(1), rs.getString(2),rs.getString(3)
+                rs.getString(1), rs.getString(2), rs.getString(3)
             });
         }
     } //Anh
 // cái nào bài mi đánh dấu đi đánh dấu abwngf cmt nha đanh dâu ten mình hả hay saoukm ukm đánh dấu tên mình ă
 
 // là sao hê ý là hồi nãy mình có them dấu ngoặc chỗ ni rồi à  dmuưf  1c doaấu ngoặc dưới kia
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,7 +128,12 @@ public class Thongke extends javax.swing.JFrame {
         ButtonXoa = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton1.setText("Show Chart");
@@ -475,22 +481,13 @@ public class Thongke extends javax.swing.JFrame {
         try {
             DateChooserNamSX.setDate(formatter.parse(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 5).toString()));
         } catch (ParseException ex) {
-            Logger.getLogger(Home
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Home.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_tableSanPhamMouseClicked
 
-    
-        void CapNhatBangSP() throws SQLException {
+    void CapNhatBangSP() throws SQLException {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         tableSanPham.setModel(defaultTableModel);
         defaultTableModel.addColumn("Mã Sách");
@@ -509,17 +506,17 @@ public class Thongke extends javax.swing.JFrame {
             });
 
         }
-        
+
         // tao bieu do cot ban dau
-             createChart(DAO.Service.Chart("5"));
+        createChart(DAO.Service.Chart("5"));
 
 //
 //        while (rs.next()) {
     }
-    
-    
+
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-         // TODO add your handling code here:
+        // TODO add your handling code here:
         if (DateChooserNamSX.getDate() != null && !TextFieldTacGia.getText().equals("") && !TextFieldTenSach.getText().equals("")) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String strDate = formatter.format(DateChooserNamSX.getDate());
@@ -528,16 +525,8 @@ public class Thongke extends javax.swing.JFrame {
                 try {
                     CapNhatBangSP();
                 } catch (SQLException ex) {
-                    Logger.getLogger(Thongke
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Thongke.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Lỗi Đầu Vào");
@@ -557,16 +546,8 @@ public class Thongke extends javax.swing.JFrame {
                 CapNhatBangSP();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Home
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Home.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ButtonXoaActionPerformed
 
@@ -580,16 +561,8 @@ public class Thongke extends javax.swing.JFrame {
                 CapNhatBangSP();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Home
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Home.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -606,16 +579,8 @@ public class Thongke extends javax.swing.JFrame {
                 createChart(DAO.Service.Chart("5"));
 
             } catch (SQLException ex) {
-                Logger.getLogger(Home
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Home.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -625,16 +590,8 @@ public class Thongke extends javax.swing.JFrame {
                 createChart(DAO.Service.Chart("10"));
 
             } catch (SQLException ex) {
-                Logger.getLogger(Home
-
-
-
-
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Home.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -656,7 +613,7 @@ public class Thongke extends javax.swing.JFrame {
         barChartData.setValue(13000, "Mark", "Tháng 11");
         barChartData.setValue(19000, "Mark", "Tháng 12");
 
-        JFreeChart jchar = ChartFactory.createBarChart("Biểu đồ", "Tháng", "Lãi", barChartData, PlotOrientation.VERTICAL, true, false,true);
+        JFreeChart jchar = ChartFactory.createBarChart("Biểu đồ", "Tháng", "Lãi", barChartData, PlotOrientation.VERTICAL, true, false, true);
         CategoryPlot plot = jchar.getCategoryPlot();
         plot.setRangeGridlinePaint(Color.black);
 
@@ -664,8 +621,12 @@ public class Thongke extends javax.swing.JFrame {
         jPanel2.removeAll();
         jPanel2.add(barPanel, BorderLayout.CENTER);
         jPanel2.validate();                           //Anh
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+   Homee.h.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -684,49 +645,17 @@ public class Thongke extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Thongke
-
-
-
-
-
-.class  
-
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Thongke.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Thongke
-
-
-
-
-
-.class  
-
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Thongke.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Thongke
-
-
-
-
-
-.class  
-
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Thongke.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Thongke
-
-
-
-
-
-.class  
-
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Thongke.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -734,22 +663,16 @@ public class Thongke extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Thongke().setVisible(true);
+                    tk = new Thongke();tk.setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Thongke
-
-
-// tải lên githup hỉ / chết rồi cái ni mi thay đổi nhiều quá// mà trước khi sửa bài ni mi có pull chưa thì tui để chạy thử lại từ từ
-
-.class  
-
-
-.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Thongke // tải lên githup hỉ / chết rồi cái ni mi thay đổi nhiều quá// mà trước khi sửa bài ni mi có pull chưa thì tui để chạy thử lại từ từ
+                            .class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
-   @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonXoa;
     private javax.swing.JComboBox<String> ComboBoxDanhMuc;
@@ -784,7 +707,7 @@ public class Thongke extends javax.swing.JFrame {
     private javax.swing.JTable tableSanPham;
     // End of variables declaration//GEN-END:variables
 
-     void createChart(List<ItemChart> itemCharts) throws SQLException {
+    void createChart(List<ItemChart> itemCharts) throws SQLException {
 
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
         for (ItemChart ic : itemCharts) {
