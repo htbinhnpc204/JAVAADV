@@ -190,6 +190,8 @@ public class Thongke extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Thống Kê Lãi", jPanel10);
 
+        jPanel11.setBackground(new java.awt.Color(0, 153, 153));
+
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
@@ -246,6 +248,8 @@ public class Thongke extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Biểu Đồ Tăng Trưởng", jPanel11);
 
+        jPanel12.setBackground(new java.awt.Color(0, 153, 153));
+
         jTable5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,6 +291,7 @@ public class Thongke extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sản Phẩm Bán Chạy", jPanel12);
 
+        jPanel9.setBackground(new java.awt.Color(0, 153, 153));
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel9MouseClicked(evt);
