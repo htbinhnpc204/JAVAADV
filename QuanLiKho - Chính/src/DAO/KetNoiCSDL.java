@@ -7,6 +7,10 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import view.KetNoiSQL;
 
 /**
  *
@@ -18,15 +22,36 @@ public class KetNoiCSDL {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databasename=demo;username:sa;password=12345");
-            String url = "jdbc:sqlserver://localhost:1433; databaseName= QLkho";
+            String url = "jdbc:sqlserver://localhost:1433; databaseName= QLkho;integratedSecurity= true;";
             String user = "sa";
             String pass = "12345";
-            conn = DriverManager.getConnection(url, user, pass);
-            System.out.println("ket noi thanh congtoi");
+            conn = DriverManager.getConnection(url);
+            System.out.println("ket noi thanh cong");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return conn;
+    }
+      
+      
+      private Connection con = null;
+
+    static public Connection KetNoiSQL() throws SQLException {
+        String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        try {
+            Class.forName(url);
+            String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=QLKho";
+            return DriverManager.getConnection(dbUrl);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KetNoiSQL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(KetNoiSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+      public static void main(String[] args) throws SQLException {
+          System.out.println(getConnection());
     }
 
 

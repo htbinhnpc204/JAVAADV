@@ -27,11 +27,11 @@ public class QLnhanvien extends javax.swing.JFrame {
     
       public static Connection getConn(String csdlName) {
         Connection conn = null;
-        String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+          String url = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         try {
             Class.forName(url);
-            String dbUrl = "jdbc:sqlserver://localhost:1433; databaseName= " + csdlName;
-            conn = DriverManager.getConnection(dbUrl,"sa","12345");
+            String dbUrl = "jdbc:sqlserver://localhost:1433; databaseName= QLKho;integratedSecurity= true;";
+            conn = DriverManager.getConnection(dbUrl);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QLnhanvien.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

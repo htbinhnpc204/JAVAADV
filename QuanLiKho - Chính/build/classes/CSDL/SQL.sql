@@ -114,11 +114,11 @@ begin
 	set @temp = (select top 1 CAST(substring(mahd,3,9) as int) as ma from HoaDon order by ma desc )
 	set @temp = @temp +1
 	set @temp = substring(@temp2,1,len(@temp2)-len(@temp) )+@temp 
-
+	
 	SET DATEFORMAT dmy
 
 	insert into HoaDon
 	values(@temp,@maNV,getdate(),@tenKH,@loai)
 	select @temp
 end
-drop procedure insertHoaDon_pr
+--drop procedure insertHoaDon_pr
