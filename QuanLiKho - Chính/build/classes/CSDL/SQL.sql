@@ -3,6 +3,13 @@ go
 
 use QLKHO
 go
+create table Login (
+Name nvarchar(50),
+Password nvarchar(50),
+)
+insert into Login
+values ('admin','123')
+go
 create table NhanVien(
 MaNV varchar(8) primary key,
 TenNV nvarchar (50) ,
