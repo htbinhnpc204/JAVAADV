@@ -22,6 +22,10 @@ public class Service {
 
     static Connection con = KetNoiCSDL.getConnection();
 
+    static public void ex(String sql) throws SQLException{
+    con.prepareStatement(sql).execute();
+    }
+    
     // 
     // lấy tổng số luong nhập trong 5 tháng
     static public List<ItemChart> Chart(String thang) throws SQLException {
@@ -50,7 +54,7 @@ public class Service {
         ps.setString(2, tenKH);
         ps.setString(3, new String(loai.getBytes("iso-8859-1"),"utf-8"));
    
-           ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
        rs.next();
        return rs.getString(1);
     }

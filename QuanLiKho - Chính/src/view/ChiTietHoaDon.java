@@ -63,9 +63,17 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
 				vec.add(rs.getString("DonGia"));
 				defaultTableModel.addRow(vec);
 			}
+                        
+                        
 			jTBchitiet.setModel(defaultTableModel);
+                        
+                        double sum = 0;
+                        for(int i = 0;i< jTBchitiet.getRowCount();i++){
+                        sum+= Double.parseDouble(jTBchitiet.getValueAt(i, 3).toString());
+                        }
+                        TextFieldTongTien.setText("VND "+String.valueOf((int)sum));
 		} catch (SQLException ex) {
-			Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
     /**
@@ -82,6 +90,8 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jTBchitiet = new javax.swing.JTable();
         jBTtrove = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TextFieldTongTien = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +121,10 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel1.setText("CHI TIẾT HÓA ĐƠN");
 
+        jLabel2.setText("Tổng Tiền :");
+
+        TextFieldTongTien.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,14 +133,19 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addComponent(jBTtrove)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +154,11 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addComponent(jBTtrove)
                 .addGap(37, 37, 37))
         );
@@ -160,12 +183,8 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
         private void jBTtroveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTtroveActionPerformed
-            try {
-                // TODO add your handling code here:
-                new Home().setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(ChiTietHoaDon.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            // TODO add your handling code here:
+          LichSu.ls.setVisible(true);
 		this.dispose();
         }//GEN-LAST:event_jBTtroveActionPerformed
 
@@ -209,8 +228,10 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TextFieldTongTien;
     private javax.swing.JButton jBTtrove;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTBchitiet;

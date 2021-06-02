@@ -99,9 +99,10 @@ begin
 
 	SET DATEFORMAT dmy
 
-	insert into SanPham (MaSach,TenSach,MaDM,Tacgia,NXB,ngayXuatBan) 
-	values(@temp,@tensach,@maDm,@tacGia,@NXB,@ngayxuatban)
+	insert into SanPham (MaSach,TenSach,MaDM,Tacgia,NXB,ngayXuatBang) 
+	values(@temp,@tensach,@maDm,@tacGia,@NXB,@ngayxuatbang)
 end
+go
 
 create procedure [dbo].[insertHoaDon_pr](@maNV varchar(20),@tenKH nvarchar(50), @loai varchar(10))
 as
@@ -113,12 +114,14 @@ begin
 
 	set @temp = (select top 1 CAST(substring(mahd,3,9) as int) as ma from HoaDon order by ma desc )
 	set @temp = @temp +1
+
 	set @temp = substring(@temp2,1,len(@temp2)-len(@temp) )+@temp 
-	
+	select @temp
 	SET DATEFORMAT dmy
 
 	insert into HoaDon
 	values(@temp,@maNV,getdate(),@tenKH,@loai)
-	select @temp
+	
+
 end
 --drop procedure insertHoaDon_pr

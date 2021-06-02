@@ -9,6 +9,10 @@ import DAO.KetNoiCSDL;
 import DAO.SanPhamDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.DanhMuc;
@@ -53,7 +59,7 @@ public class Thongke extends javax.swing.JFrame {
                 ComboBoxDanhMuc.addItem(dm.getMaDanhMucString() + " " + dm.getTendanhMucString());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         createTable();           // tao bieu do cot
@@ -127,6 +133,8 @@ public class Thongke extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         ButtonXoa = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        lbImage = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -186,7 +194,7 @@ public class Thongke extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 567, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel10Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -248,7 +256,7 @@ public class Thongke extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelBieuDoThongBao)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -292,7 +300,7 @@ public class Thongke extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sản Phẩm Bán Chạy", jPanel12);
@@ -378,6 +386,13 @@ public class Thongke extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Chọn Ảnh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -419,6 +434,10 @@ public class Thongke extends javax.swing.JFrame {
                                 .addGap(23, 23, 23))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(TextFieldNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
+                                .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(jButton2)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel9Layout.setVerticalGroup(
@@ -433,18 +452,29 @@ public class Thongke extends javax.swing.JFrame {
                         .addComponent(ComboBoxDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel23))
                     .addComponent(DateChooserNamSX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(TextFieldTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26)
-                    .addComponent(TextFieldNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(ButtonXoa)
-                    .addComponent(jButton9))
-                .addGap(38, 38, 38)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel25)
+                                    .addComponent(TextFieldTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel26)
+                                    .addComponent(TextFieldNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(jButton2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton8)
+                            .addComponent(ButtonXoa)
+                            .addComponent(jButton9))
+                        .addGap(38, 38, 38)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -478,10 +508,21 @@ public class Thongke extends javax.swing.JFrame {
         TextFieldNhaXuatBan.setText(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 4).toString());
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        
+        // theem anhr
+                     ImageIcon icon = new ImageIcon(tableSanPham.getValueAt(tableSanPham.getSelectedRow(),6).toString());
+       
+             double tile = 1.0*lbImage.getWidth()/icon.getIconWidth();
+             tile = icon.getIconHeight()*tile;
+             Image immge = icon.getImage().getScaledInstance(lbImage.getWidth(), (int)tile, Image.SCALE_SMOOTH);
+             
+             icon.setImage(immge);
+             lbImage.setIcon(icon);
+        
         try {
             DateChooserNamSX.setDate(formatter.parse(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 5).toString()));
         } catch (ParseException ex) {
-            Logger.getLogger(Home.class
+            Logger.getLogger(Homee.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -496,12 +537,13 @@ public class Thongke extends javax.swing.JFrame {
         defaultTableModel.addColumn("Tác Giả");
         defaultTableModel.addColumn("Nhà Sản Xuất");
         defaultTableModel.addColumn("Ngày Sản Xuất");
+        defaultTableModel.addColumn("src");
 
         List<SanPham> sanPhams = SanPhamDAO.getSanPhamAll();
         for (SanPham sp : sanPhams) {
 
             defaultTableModel.addRow(new Object[]{
-                sp.getMaSachString(), sp.getTenSachString(), sp.getMaDanhMucString(), sp.getTacGiaString(), sp.getNhaXuatBanString(), sp.getNgaySanXuatString()
+                sp.getMaSachString(), sp.getTenSachString(), sp.getMaDanhMucString(), sp.getTacGiaString(), sp.getNhaXuatBanString(), sp.getNgaySanXuatString(),sp.getSrc()
 
             });
 
@@ -520,8 +562,37 @@ public class Thongke extends javax.swing.JFrame {
         if (DateChooserNamSX.getDate() != null && !TextFieldTacGia.getText().equals("") && !TextFieldTenSach.getText().equals("")) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String strDate = formatter.format(DateChooserNamSX.getDate());
-            if (!DAO.SanPhamDAO.insertData(new SanPham(null, TextFieldTenSach.getText(), ComboBoxDanhMuc.getSelectedItem().toString().substring(0, ComboBoxDanhMuc.getSelectedItem().toString().indexOf(' ')), TextFieldTacGia.getText(), TextFieldNhaXuatBan.getText(), strDate))) {
+            
+            
+            String temp = DAO.SanPhamDAO.insertData(new SanPham(null, TextFieldTenSach.getText(), ComboBoxDanhMuc.getSelectedItem().toString().substring(0, ComboBoxDanhMuc.getSelectedItem().toString().indexOf(' ')), TextFieldTacGia.getText(), TextFieldNhaXuatBan.getText(), strDate,src));
+         
+            if(!src.equals("src\\img\\none.jpg")){
+               
+            
+                    File f = new File(src);
+                    File f1 = new File("src\\img\\" + temp + ".jpg");
+                 System.out.println(f1.toPath());
+                    src = "src\\img\\none.jpg";
+                try {
+                    System.out.println("update sanPham \n set src = '"+"src\\img\\" + temp + ".jpg' where maSach = '"+temp+"'");
+                    DAO.Service.ex("use QLKHo \n update sanPham \n set src = '"+"src\\img\\" + temp + ".jpg' where maSach = '"+temp+"'");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Thongke.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    Files.copy(f.toPath(), f1.toPath());
+                } catch (IOException ex) {
+                    Logger.getLogger(Thongke.class.getName()).log(Level.SEVERE, null, ex);
+                }
+       
+                    
+                }
+            
+            if ( temp != null) {
                 JOptionPane.showMessageDialog(null, "Thêm Thành Công");
+        
+                
+             
                 try {
                     CapNhatBangSP();
                 } catch (SQLException ex) {
@@ -540,13 +611,19 @@ public class Thongke extends javax.swing.JFrame {
     private void ButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXoaActionPerformed
         try {
             // TODO add your handling code here:
-            if (!DAO.SanPhamDAO.deleteData(new SanPham(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString(), null, null, null, null, null))) {
+            if (!DAO.SanPhamDAO.deleteData(new SanPham(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString(), null, null, null, null, null,null))) {
+                if(!tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 6).toString().equals("src\\img\\none.jpg")){
+                
+                   File f = new File(tableSanPham.getValueAt(tableSanPham.getSelectedRow(),6).toString());
+                f.delete(); 
+                }
+            
                 JOptionPane.showMessageDialog(null, "Xóa Thành Công");
                 CapNhatBangSP();
-                CapNhatBangSP();
+           
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Home.class
+            Logger.getLogger(Homee.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ButtonXoaActionPerformed
@@ -555,13 +632,23 @@ public class Thongke extends javax.swing.JFrame {
         // TODO add your handling code here:
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(DateChooserNamSX.getDate());
+      
         try {
-            if (!DAO.SanPhamDAO.upData(new SanPham(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString(), TextFieldTenSach.getText(), ComboBoxDanhMuc.getSelectedItem().toString().substring(0, ComboBoxDanhMuc.getSelectedItem().toString().indexOf(' ')), TextFieldTacGia.getText(), TextFieldNhaXuatBan.getText(), strDate))) {
+            if(src.equals("src\\img\\none.jpg")){
+                if (!DAO.SanPhamDAO.upData(new SanPham(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString(), TextFieldTenSach.getText(), ComboBoxDanhMuc.getSelectedItem().toString().substring(0, ComboBoxDanhMuc.getSelectedItem().toString().indexOf(' ')), TextFieldTacGia.getText(), TextFieldNhaXuatBan.getText(), strDate,tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 6).toString()))) {
+                JOptionPane.showMessageDialog(null, "Cập Nhật Thành Công");
+                CapNhatBangSP();
+            }        
+            }else{
+            if (!DAO.SanPhamDAO.upData(new SanPham(tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString(), TextFieldTenSach.getText(), ComboBoxDanhMuc.getSelectedItem().toString().substring(0, ComboBoxDanhMuc.getSelectedItem().toString().indexOf(' ')), TextFieldTacGia.getText(), TextFieldNhaXuatBan.getText(), strDate,src))) {
+            src = "src\\img\\none.jpg";
                 JOptionPane.showMessageDialog(null, "Cập Nhật Thành Công");
                 CapNhatBangSP();
             }
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(Home.class
+            Logger.getLogger(Homee.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -579,7 +666,7 @@ public class Thongke extends javax.swing.JFrame {
                 createChart(DAO.Service.Chart("5"));
 
             } catch (SQLException ex) {
-                Logger.getLogger(Home.class
+                Logger.getLogger(Homee.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -590,7 +677,7 @@ public class Thongke extends javax.swing.JFrame {
                 createChart(DAO.Service.Chart("10"));
 
             } catch (SQLException ex) {
-                Logger.getLogger(Home.class
+                Logger.getLogger(Homee.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -627,6 +714,33 @@ public class Thongke extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
    Homee.h.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
+static String src = "src\\img\\none.jpg";
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         // TODO add your handling code here:
+         
+         try {
+            JFileChooser chooser = new  JFileChooser(); 
+            chooser.showOpenDialog(null);
+             File f = chooser.getSelectedFile();
+             ImageIcon icon = new ImageIcon(f.getAbsolutePath());
+       
+             double tile = 1.0*lbImage.getWidth()/icon.getIconWidth();
+       
+             src = f.getAbsolutePath();
+             tile = icon.getIconHeight()*tile;
+             Image immge = icon.getImage().getScaledInstance(lbImage.getWidth(), (int)tile, Image.SCALE_SMOOTH);
+             
+             icon.setImage(immge);
+             lbImage.setIcon(icon);
+             
+             
+             
+             
+             
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -683,6 +797,7 @@ public class Thongke extends javax.swing.JFrame {
     private javax.swing.JPanel chartPanel;
     private javax.swing.JComboBox<String> comboBoxChonThang;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -704,6 +819,7 @@ public class Thongke extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable5;
     private javax.swing.JLabel labelBieuDoThongBao;
+    private javax.swing.JLabel lbImage;
     private javax.swing.JTable tableSanPham;
     // End of variables declaration//GEN-END:variables
 

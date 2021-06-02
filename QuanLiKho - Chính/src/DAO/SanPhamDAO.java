@@ -37,17 +37,19 @@ public class SanPhamDAO {
 
         while (rs.next()) {
          
-            sanPhams.add(new SanPham(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+            sanPhams.add(new SanPham(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
         }
         return sanPhams;
     }
 
-    static public boolean insertData(SanPham sp){
+    static public String insertData(SanPham sp){
 
         String query = "use QlKHO \n"
-                + "exec dbo.insertSanPham_pr ?, ?, ?, ?, ? ";
+                + "exec dbo.insertSanPham_pr ?, ?, ?, ?, ?, ? \n"
+                + "";
 
         PreparedStatement ps;
+        String maString = null;
         try {
             ps = con.prepareStatement(query);
              ps.setString(1, sp.getTenSachString());
@@ -55,12 +57,18 @@ public class SanPhamDAO {
         ps.setString(3, sp.getTacGiaString());
         ps.setString(4, sp.getNhaXuatBanString());
         ps.setString(5, sp.getNgaySanXuatString());
+      ps.setString(6, sp.getSrc());
         ps.execute();
-        return false;
+        
+        ResultSet rs = con.prepareStatement("select top 1 maSach, CAST(substring(MaSach,2,9) as int) as ma from SanPham order by ma desc ").executeQuery();
+        rs.next();
+        
+        maString = rs.getString(1);
+        return maString;
         } catch (SQLException ex) {
             Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
+        return null;
        
 
     }
@@ -79,7 +87,8 @@ public class SanPhamDAO {
       static public boolean upData(SanPham sp) throws SQLException {
 
         String query = "use QlKHO \n"
-                + "update SANPHAM set tenSach = ?, maDM = ?, tacgia = ?,NXB = ?,ngayXuatBang = ?  where maSach = ?";
+                + " 	SET DATEFORMAT dmy\n "
+                + "update SANPHAM set tenSach = ?, maDM = ?, tacgia = ?,NXB = ?,ngayXuatBang = ? , src =?  where maSach = ?";
 
         PreparedStatement ps = con.prepareStatement(query);
         
@@ -88,7 +97,8 @@ public class SanPhamDAO {
         ps.setString(3, sp.getTacGiaString());
         ps.setString(4, sp.getNhaXuatBanString());
         ps.setString(5, sp.getNgaySanXuatString());
-        ps.setString(6, sp.getMaSachString());
+        ps.setString(6, sp.getSrc());
+          ps.setString(7, sp.getMaSachString());
 
         return ps.execute();
 

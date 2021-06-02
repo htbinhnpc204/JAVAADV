@@ -294,9 +294,9 @@ public class QLKho extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null, "Thêm Thành Công");
         } catch (SQLException ex) {
                  JOptionPane.showMessageDialog(null, "Chưa thể thêm vào CSDL");
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
         }
          
     }//GEN-LAST:event_jButton6ActionPerformed

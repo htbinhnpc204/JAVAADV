@@ -50,6 +50,7 @@ TenSach nvarchar (20) ,
 MaDM varchar(8) ,
 Tacgia nvarchar(30) ,
 NXB nvarchar(30),
+ngayXuatBang date,
 Gia money ,
 )
 go
@@ -120,3 +121,40 @@ Values('HD01','S01','20','1'),
 	  ('HD14','S06','13','5'),
 	  ('HD15','S08','20','6')
 go
+
+create procedure [dbo].[insertSanPham_pr](@tensach nvarchar(20),@maDm varchar(8),@tacGia nvarchar(30),@NXB nvarchar(30), @ngayxuatbang varchar(12))
+as
+begin 
+	declare @temp as varchar(10)
+	declare @temp2 as varchar(10)
+
+	set @temp2 = (select top 1 MaSach as ma from SanPham)
+
+	set @temp = (select top 1 CAST(substring(MaSach,3,9) as int) as ma from SanPham order by ma desc )
+	set @temp = @temp +1
+	set @temp = substring(@temp2,1,len(@temp2)-len(@temp) )+@temp 
+
+	SET DATEFORMAT dmy
+
+	insert into SanPham (MaSach,TenSach,MaDM,Tacgia,NXB,ngayXuatBan) 
+	values(@temp,@tensach,@maDm,@tacGia,@NXB,@ngayxuatban)
+end
+
+create procedure [dbo].[insertHoaDon_pr](@maNV varchar(20),@tenKH nvarchar(50), @loai varchar(10))
+as
+begin 
+	declare @temp as varchar(10)
+	declare @temp2 as varchar(10)
+
+	set @temp2 = (select top 1 mahd as ma from Hoadon)
+
+	set @temp = (select top 1 CAST(substring(mahd,3,9) as int) as ma from HoaDon order by ma desc )
+	set @temp = @temp +1
+	set @temp = substring(@temp2,1,len(@temp2)-len(@temp) )+@temp 
+	
+	SET DATEFORMAT dmy
+
+	insert into HoaDon
+	values(@temp,@maNV,getdate(),@tenKH,@loai)
+	select @temp
+end

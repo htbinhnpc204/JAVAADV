@@ -10,15 +10,24 @@ package model;
  * @author Dai
  */
 public class SanPham {
-    String maSachString,tenSachString,maDanhMucString,tacGiaString,nhaXuatBanString,ngaySanXuatString;
+    String maSachString,tenSachString,maDanhMucString,tacGiaString,nhaXuatBanString,ngaySanXuatString,src;
 
-    public SanPham(String maSachString, String tenSachString, String maDanhMucString, String tacGiaString, String nhaXuatBanString, String ngaySanXuatString) {
+    public SanPham(String maSachString, String tenSachString, String maDanhMucString, String tacGiaString, String nhaXuatBanString, String ngaySanXuatString,String src) {
         this.maSachString = maSachString;
         this.tenSachString = tenSachString;
         this.maDanhMucString = maDanhMucString;
         this.tacGiaString = tacGiaString;
         this.nhaXuatBanString = nhaXuatBanString;
         this.ngaySanXuatString = ngaySanXuatString;
+        this.src = src;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 
     public String getNhaXuatBanString() {

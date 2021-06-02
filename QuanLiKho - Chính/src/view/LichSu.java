@@ -11,6 +11,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import sun.security.util.Length;
 
 /**
@@ -25,12 +28,19 @@ public class LichSu extends javax.swing.JFrame {
 	public Statement st;
 	DefaultTableModel defaultTableModel;
 	KetNoiSQL ketnoi = new KetNoiSQL();
+        
+        private TableRowSorter<TableModel> rowSorter;
+        
     /**
      * Creates new form LichSu
      */
     public LichSu() {
         initComponents();
-        setData("desc");
+        setData("  ");
+        
+        this.rowSorter = new TableRowSorter<>(jTBlichsunhapxuat.getModel());
+	jTBlichsunhapxuat.setRowSorter(rowSorter);	
+        
     }
        private void setData(String a){
 	ketnoi.KetNoi();
@@ -56,7 +66,7 @@ public class LichSu extends javax.swing.JFrame {
 		}
 		jTBlichsunhapxuat.setModel(defaultTableModel);
 	} catch (SQLException ex) {
-		Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+		Logger.getLogger(Homee.class.getName()).log(Level.SEVERE, null, ex);
 	}
 	 
     }
@@ -73,8 +83,7 @@ public class LichSu extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTBlichsunhapxuat = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        tbxTenKH = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jCBsapxep = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
@@ -105,32 +114,31 @@ public class LichSu extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTBlichsunhapxuat);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Find.png"))); // NOI18N
-        jButton3.setText("Tìm Kiếm");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        tbxTenKH.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        tbxTenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                tbxTenKHActionPerformed(evt);
             }
         });
-
-        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+        tbxTenKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tbxTenKHKeyReleased(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel3.setText("Nhập mã nhập-xuất");
+        jLabel3.setText("Từ Khóa");
 
         jCBsapxep.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jCBsapxep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mới -> Cũ", "Cũ -> Mới" }));
+        jCBsapxep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBsapxepActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton4.setText("Hủy");
+        jButton4.setText("Cập Nhật");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -161,9 +169,7 @@ public class LichSu extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addComponent(jLabel3)
                         .addGap(19, 19, 19)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton3)
+                        .addComponent(tbxTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
@@ -183,17 +189,16 @@ public class LichSu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(tbxTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
                     .addComponent(jLabel4)
                     .addComponent(jButton7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
@@ -224,37 +229,9 @@ public class LichSu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-ketnoi.KetNoi();
-	try {
-		rs = ketnoi.getDataById("HoaDon",jTextField2.getText());
-		jTBlichsunhapxuat.removeAll();
-		String [] arr = {"Mã HD","Mã NV","Ngày nhập/xuất","Tên KH","Loại HD"};
-		defaultTableModel = new DefaultTableModel(arr,0){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-			//all cells false
-				return false;
-		}
-		};
-		while(rs.next()){
-			Vector vec = new Vector();
-			vec.add(rs.getString("MaHD"));
-			vec.add(rs.getString("MaNV"));
-			vec.add(rs.getString("Ngay"));
-			vec.add(rs.getString("TenKH"));
-			vec.add(rs.getString("Loai"));
-			defaultTableModel.addRow(vec);
-		}
-		jTBlichsunhapxuat.setModel(defaultTableModel);
-	} catch (SQLException ex) {
-		Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-	}        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tbxTenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxTenKHActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tbxTenKHActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 		int row = jTBlichsunhapxuat.getSelectedRow();
@@ -270,17 +247,40 @@ ketnoi.KetNoi();
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		defaultTableModel.setRowCount(0);
 		String sapxep = String.valueOf(jCBsapxep.getSelectedItem());
-		if (sapxep == "Mới -> Cũ"){
-			setData("desc");
-		} else {
-			setData("asc");
-		}        // TODO add your handling code here:
+		setData(" ");       // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
    Homee.h.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
+    private void jCBsapxepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsapxepActionPerformed
+ 	defaultTableModel.setRowCount(0);
+		String sapxep = String.valueOf(jCBsapxep.getSelectedItem());
+		if (sapxep == "Mới -> Cũ"){
+			setData(" Order by ngay desc");
+		} else {
+			setData(" Order by ngay asc");
+		}
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBsapxepActionPerformed
+
+    private void tbxTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxTenKHKeyReleased
+        // TODO add your handling code here:
+        	sorter();
+    }//GEN-LAST:event_tbxTenKHKeyReleased
+	
+	void sorter(){
+		String text = tbxTenKH.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+	}
     /**
      * @param args the command line arguments
      */
@@ -317,7 +317,6 @@ ketnoi.KetNoi();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jCBsapxep;
@@ -327,6 +326,6 @@ ketnoi.KetNoi();
     private javax.swing.JPanel jPanel15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTBlichsunhapxuat;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField tbxTenKH;
     // End of variables declaration//GEN-END:variables
 }
