@@ -4,8 +4,11 @@ use QLKHO
 go
 create table Login(
 userName varchar (10) primary key,
-pass nchar (10)
+pass nchar (5)
 )
+insert into Login
+values ('ABDPT', '12345')
+
 create table NhanVien(
 MaNV varchar(8) primary key,
 TenNV nvarchar (50) ,
@@ -53,9 +56,13 @@ go
 insert into SanPham
 Values ('S01',N'Lập trình Java 2','DM01',N'Đỗ Phú',N'Kim Đồng','50000'),
 	   ('S02',N'Lập trình C','DM02',N'Hoàng Thị Mỹ Lệ','SPKT','90000'),
-	   ('S03',N'Toán rời rạc','DM03',N'Khong biet','HCM','100000'),
+	   ('S03',N'Toán rời rạc','DM03',N'Không biết','HCM','100000'),
 	   ('S04',N'Kinh Tế Chính Trị','DM04',N'Trần Quân','HCM','60000'),
-	   ('S05',N'Lịch Sử Đảng','DM04',N'Đình Nhân','Hà Nội','400000')
+	   ('S05',N'Lịch Sử Đảng','DM04',N'Đình Nhân',N'Hà Nội','400000'),
+	   ('S06',N'Triết','DM04',N'Quý Bùi',N'Đông Tiến','500000'),
+	   ('S07',N'Lập trình trực quan','DM01',N'Lê Vũ','SPKT','550000'),
+	   ('S08',N'Cơ sở dữ liệu 2','DM02',N'Nguyễn Hà Quyên','SPKT','200000'),
+	   ('S09',N'Giải tích','DM04',N'Không biết','Hà Nội','400000')
 go
 create table HoaDon(
 MaHD varchar(8) primary key,
@@ -77,7 +84,12 @@ Values('HD01','NV02','24/05/2019',N'Nguyễn An','N'),
 	  ('HD07','NV02','04/06/2020',N'Bùi Châu Hiền ','X'),
 	  ('HD08','NV01','05/07/2017',N'Hồ Lát','X'),
 	  ('HD09','NV03','11/12/2020',N'Trần Anh Vệt','N'),
-	  ('HD10','NV02','11/11/2020',N'Võ Xuân Hương','N')
+	  ('HD10','NV02','11/11/2020',N'Võ Xuân Hương','N'),
+	  ('HD11','NV05','11/03/2020',N'Võ Xuân ','N'),
+	  ('HD12','NV04','21/01/2021',N'Việt Thái','X'),
+	  ('HD13','NV01','31/08/2020',N'Haha','N'),
+	  ('HD14','NV02','22/10/2020',N'Trịnh Bắc','N'),
+	  ('HD15','NV05','01/06/2020',N'Lê Văn Ty','X')
 go
 create table ChiTietHoaDon(
 MaHD varchar(8) ,
@@ -96,10 +108,15 @@ Values('HD01','S01','20','1'),
 	  ('HD02','S03','50','1'),
 	  ('HD03','S02','15','1'),
 	  ('HD04','S05','2','1'),
-	  ('HD05','S03','20','1'),
-	  ('HD06','S02','15','1'),
-	  ('HD07','S04','10','2'),
-	  ('HD08','S01','30','3'),
-	  ('HD09','S05','15','1'),
-	  ('HD10','S04','16','4')
+	  ('HD05','S04','20','1'),
+	  ('HD06','S06','15','1'),
+	  ('HD07','S07','10','2'),
+	  ('HD08','S08','30','3'),
+	  ('HD09','S09','15','1'),
+	  ('HD10','S04','16','4'),
+	  ('HD11','S03','12','2'),
+	  ('HD12','S02','2','4'),
+	  ('HD13','S01','11','2'),
+	  ('HD14','S06','13','5'),
+	  ('HD15','S08','20','6')
 go
